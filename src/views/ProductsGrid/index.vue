@@ -2,49 +2,60 @@
   <v-data-table
     :headers="headers"
     :items="products"
-    sort-by="calories"
+    sort-by="brand"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>Продукты</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
-        <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on"
-              >New Item</v-btn
+            <v-btn
+              color="success"
+              data-test-id="create-button"
+              dark
+              class="mb-2"
+              v-bind="attrs"
+              v-on="on"
             >
+              <v-icon class="mr-2" size="large">mdi-plus</v-icon
+              >{{ $t("buttons.new") }}
+            </v-btn>
           </template>
-          <CustomGrid title="kek" />
+          <ProductEditModal />
         </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
-        mdi-pencil
-      </v-icon>
-      <v-icon small @click="deleteItem(item)">
-        mdi-delete
-      </v-icon>
+      <v-btn icon data-test-id="edit-button" @click="editItem(item)">
+        <v-icon small>
+          mdi-pencil
+        </v-icon>
+      </v-btn>
+      <v-btn icon data-test-id="delete-button" @click="deleteItem(item)">
+        <v-icon small>
+          mdi-delete
+        </v-icon>
+      </v-btn>
     </template>
   </v-data-table>
 </template>
 
 <script>
 import { settings } from "./settings/grid";
-import CustomGrid from "@/components/CustomGrid";
+import ProductEditModal from "./components/ProductEditModal";
 export default {
   components: {
-    CustomGrid
+    ProductEditModal
   },
-  data() {
-    return {
-      headers: settings.headers
-    };
-  },
-
   computed: {
+    headers() {
+      return settings.headers.map(elem => {
+        return {
+          text: elem.text ? this.$t(`product_headers.${elem.text}`) : "",
+          value: elem.value
+        };
+      });
+    },
     editedIndex() {
       return this.$store.getters.editedIndex;
     },

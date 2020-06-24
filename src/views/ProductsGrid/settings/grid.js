@@ -12,6 +12,6 @@ export const settings = {
     { text: "quantity", value: "quantity" },
     { text: "price", value: "price" },
     { text: "stock", value: "stock" },
-    { text: "Actions", value: "actions", sortable: false }
+    { text: "", value: "actions", sortable: false }
   ]
 };

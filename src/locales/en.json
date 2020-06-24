@@ -1,0 +1,15 @@
+{
+  "product_headers" : {
+     "name" : "Name",
+     "artnumber": "Artnumber",
+     "brand" : "Brand",
+     "weight": "Weight",
+     "quantity": "Quantity",
+     "price": "Price",
+     "stock": "Stock",
+     "actions": "Actions"
+  },
+  "buttons": {
+    "new": "Create product"
+  }
+ }

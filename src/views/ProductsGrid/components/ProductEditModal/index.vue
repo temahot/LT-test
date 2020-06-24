@@ -1,13 +1,13 @@
 <template>
   <v-card>
     <v-card-title>
-      <span class="headline">{{ title }}</span>
+      <span class="headline">{{ modalTitle }}</span>
     </v-card-title>
     <v-card-text>
       <v-container>
         <v-row>
           <v-col
-            v-for="item in Object.keys(editedItem)"
+            v-for="item in fieldsNames"
             :key="item.artnumber"
             cols="12"
             sm="6"
@@ -15,7 +15,8 @@
           >
             <v-text-field
               v-model="editedItem[`${item}`]"
-              :label="`${item}`"
+              :label="$t(`product_headers.${item}`)"
+              :placeholder="$t(`product_headers.${item}`)"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -32,9 +33,6 @@
 
 <script>
 export default {
-  props: {
-    title: String
-  },
   methods: {
     close() {
       this.$store.dispatch({ type: "close" });
@@ -44,6 +42,14 @@ export default {
     }
   },
   computed: {
+    fieldsNames() {
+      return Object.keys(this.editedItem || {});
+    },
+    modalTitle() {
+      return this.$store.getters.editedIndex === -1
+        ? this.$t("modals.create")
+        : this.$t("modals.edit");
+    },
     editedItem() {
       return this.$store.getters.editedItem;
     }
