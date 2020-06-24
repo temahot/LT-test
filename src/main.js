@@ -5,12 +5,10 @@ import "babel-polyfill";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
-import { globalMixin } from "./mixins/global";
 import i18n from "./i18n";
 Vue.config.productionTip = false;
 
 new Vue({
-  mixins: [globalMixin],
   router,
   store,
   vuetify,
