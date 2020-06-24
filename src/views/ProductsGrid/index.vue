@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="products"
-    sort-by="brand"
+    sort-by="name"
     class="elevation-1"
   >
     <template v-slot:top>
