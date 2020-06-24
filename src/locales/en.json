@@ -11,5 +11,9 @@
   },
   "buttons": {
     "new": "Create product"
+  },
+  "modals" : {
+    "create": "Create new product",
+    "edit": "Product edit"
   }
  }
